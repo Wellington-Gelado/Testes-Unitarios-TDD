@@ -16,7 +16,7 @@ public class ReajusteServiceTest {
         ReajusteService service = new ReajusteService();
         Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
 
-        service.concederReajuste(funcionario, Desempenho.A_Desejar);
+        service.concederReajuste(funcionario, Desempenho.A_DESEJAR);
 
         assertEquals(new BigDecimal("1030.00"), funcionario.getSalario());
     }
@@ -26,9 +26,19 @@ public class ReajusteServiceTest {
         ReajusteService service = new ReajusteService();
         Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
 
-        service.concederReajuste(funcionario, Desempenho.Bom);
+        service.concederReajuste(funcionario, Desempenho.BOM);
 
         assertEquals(new BigDecimal("1150.00"), funcionario.getSalario());
+    }
+
+    @Test
+    public void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo(){
+        ReajusteService service = new ReajusteService();
+        Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
+
+        service.concederReajuste(funcionario, Desempenho.OTIMO);
+
+        assertEquals(new BigDecimal("1200.00"), funcionario.getSalario());
     }
 
 }
