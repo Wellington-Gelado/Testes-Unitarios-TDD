@@ -15,16 +15,15 @@ class BonusServiceTest {
     @Order(1)
     void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoAlto(){
         BonusService service = new BonusService();
-        BigDecimal bonus = service.
-                        calcularBonus(
-                                new Funcionario(
-                                        "Wellington",
-                                         LocalDate.now(),
-                                         new BigDecimal("25000")
-                                )
-                        );
 
-        assertEquals(new BigDecimal("0.00"), bonus);
+        assertThrows(IllegalArgumentException.class,
+                () -> service.calcularBonus( new Funcionario(
+                                                "Wellington",
+                                                 LocalDate.now(),
+                                                 new BigDecimal("25000")
+                                                                            )
+                )
+        );
     }
 
     @Test
