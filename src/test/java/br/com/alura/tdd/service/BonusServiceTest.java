@@ -13,17 +13,30 @@ class BonusServiceTest {
 
     @Test
     @Order(1)
-    void bonusDeveriaSerZeroParaFuncionarioComSalarioMuitoAlto(){
+    void DeveriaLancarExcecaoNaHoraDeCalcularBonusParaFuncionarioComSalarioMuitoAlto(){
         BonusService service = new BonusService();
 
-        assertThrows(IllegalArgumentException.class,
+        /*assertThrows(IllegalArgumentException.class,
                 () -> service.calcularBonus( new Funcionario(
                                                 "Wellington",
                                                  LocalDate.now(),
                                                  new BigDecimal("25000")
                                                                             )
                 )
-        );
+        );*/
+
+        try{
+            service.calcularBonus( new Funcionario(
+                    "Wellington",
+                    LocalDate.now(),
+                    new BigDecimal("25000")
+            ));
+            //DIZENDO AO JUNIT QUE A EXCEÇÃO NÃO FOI CAPTURADA COMO DEVIDO
+            fail("Não capturou a exception!");
+
+        } catch (Exception e) {
+            assertEquals("Não existe bÔnus para salário maior do que R$ 10.000,00", e.getMessage());
+        }
     }
 
     @Test
