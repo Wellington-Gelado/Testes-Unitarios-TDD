@@ -11,10 +11,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReajusteServiceTest {
 
+    private ReajusteService service;
+
+    private Funcionario funcionario;
+
+    public void inicializar(){
+        this.service = new ReajusteService();
+        this.funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
+
+    }
+
+
     @Test
     public void reajusteDeveriaSerDeTresPorcentoQuandoDesempenhoForADesejar(){
-        ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
+        inicializar();
 
         service.concederReajuste(funcionario, Desempenho.A_DESEJAR);
 
@@ -23,8 +33,7 @@ public class ReajusteServiceTest {
 
     @Test
     public void reajusteDeveriaSerDeQuinzePorcentoQuandoDesempenhoForBom(){
-        ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
+       inicializar();
 
         service.concederReajuste(funcionario, Desempenho.BOM);
 
@@ -33,8 +42,7 @@ public class ReajusteServiceTest {
 
     @Test
     public void reajusteDeveriaSerDeVintePorcentoQuandoDesempenhoForOtimo(){
-        ReajusteService service = new ReajusteService();
-        Funcionario funcionario = new Funcionario("Nome de Teste", LocalDate.now(), new BigDecimal("1000.00"));
+        inicializar();
 
         service.concederReajuste(funcionario, Desempenho.OTIMO);
 
